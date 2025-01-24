@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #e2e7ec;
+}
+
+.header {
+  padding-top: 20px;
+  top: 0px;
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 15px 0 rgb(132, 132, 132);
+}
+
+.icon {
+  position: relative;
+}
+
+.logoImg img {
+  margin-left: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.icon img {
+  margin-top: 10px;
+  margin-right: 20px;
+  width: 33px;
+  height: 33px;
+  cursor: pointer;
+}
+
+.num {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(215, 215, 215);
+  color: white;
+  right: 15px;
+  top: 25px;
+}
+
+#mainContainer {
+  margin: 130px auto 0 auto;
+  width: 1280px;
+  height: 500px;
+  background-color: white;
+}
