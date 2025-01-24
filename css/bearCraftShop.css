@@ -64,5 +64,11 @@ body {
 }
 
 #mainContainer hr {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.box img {
+  width: 300px;
+  background-color: white;
+  margin: 0 auto;
 }
