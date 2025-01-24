@@ -332,7 +332,7 @@ function addTr() {
 
     tbody.innerHTML = `
     <tr id="${data.id}" data-id="${data.id}">
-      <td><img src="${data.img}" /></td> 
+      <td><img src="${data.img}" /></td>
       <td><div> ${data.name} </div></td> 
       <td><div> ${priceFin} </div></td>
       <td><div> ${data.detail} </div></td> 
