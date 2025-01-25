@@ -53,22 +53,69 @@ body {
 /* 메인 */
 #mainContainer {
   margin: 130px auto 0 auto;
-  width: 1280px;
-  height: 500px;
+  max-width: 1280px;
+  height: auto;
   /* background-color: white; */
   color: rgb(56, 56, 56);
 }
 
 #mainContainer h2 {
   margin-bottom: 20px;
+  margin-left: 2%;
 }
 
 #mainContainer hr {
+  max-width: 97%;
   margin-bottom: 30px;
+  overflow: hidden;
 }
 
-.box img {
-  width: 300px;
-  background-color: white;
+#content {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 2.5%;
+  justify-content: flex-start;
+}
+
+/* 제품 이미지, 정보 div */
+#productBox {
+  width: 230px;
+  display: flex;
+  margin: 0px 5px 20px 5px;
+}
+
+.box {
+  background-color: rgba(255, 255, 255, 0.516);
+  margin-left: 2%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 7%;
+}
+
+.imgBox img {
+  max-width: 90%;
   margin: 0 auto;
+}
+
+.font {
+  font-family: "Ubuntu", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 17px;
+}
+
+.mar {
+  margin-bottom: 5%;
+}
+
+.innerBox {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.heartIcon img {
+  width: 20%;
 }
