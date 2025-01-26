@@ -39,6 +39,24 @@ let detailCom = true;
 // 로컬 스토리지
 let saveData = JSON.parse(window.localStorage.getItem("saveData")) || [];
 
+// 네비게이션 경고창
+function alert() {
+  Swal.fire({
+    icon: "error",
+    title: "준비 중..",
+    text: "아직 준비되지 않았습니다.",
+  });
+}
+
+// 페이지 이동
+function move() {
+  window.location.href = "../html/bearCraftShopCart.html";
+}
+
+function moveDetail(id) {
+  window.location.href = `../html/bearCraftShopDetail.html?id=${id}`;
+}
+
 // 저장 버튼 활성화
 function complete() {
   if (idComplete && nameComplete && priceComplete && detailComplete) {
@@ -168,7 +186,7 @@ function modifyInput(userId) {
       com(userId);
     }
   } else if (inputTarget.id === "detail") {
-    if (inputTarget.value.length < 15) {
+    if (inputTarget.value.length < 10) {
       alertDiv.innerText = "상세 정보는 10자 이상 작성하여주세요.";
       detailCom = false;
       com(userId);
@@ -194,7 +212,7 @@ function modifyList(id) {
   const userId = user.id;
   const name = user.name;
   const price = user.price;
-  const detail = user.detail;
+  const detail = user.detail.replaceAll(" ", "-");
 
   cells[0].innerHTML = `<input id='name' value=${name} /><div id='alret'></div>`;
   cells[1].innerHTML = `<input id='price' type='number' value=${price} /><div id='alret'></div>`;
@@ -226,7 +244,7 @@ function modifyCom() {
 
   const name = inputs[0].value;
   const price = inputs[1].value;
-  const detail = inputs[2].value;
+  const detail = inputs[2].value.replaceAll("-", " ");
 
   const nameInp = tdAll[1];
   const priceInp = tdAll[2];

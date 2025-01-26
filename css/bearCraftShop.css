@@ -7,6 +7,14 @@ body {
   background-color: #e2e7ec;
 }
 
+.font {
+  font-family: "Ubuntu", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 17px;
+  user-select: none;
+}
+
 /* 네비게이션 */
 .header {
   padding-top: 20px;
@@ -26,22 +34,24 @@ body {
 
 .logoImg img {
   margin-left: 20px;
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
   cursor: pointer;
 }
 
 .icon img {
   margin-top: 10px;
   margin-right: 20px;
-  width: 33px;
-  height: 33px;
+  max-width: 33px;
+  max-height: 33px;
   cursor: pointer;
 }
 
 .num {
   position: absolute;
+  max-width: 20px;
   width: 20px;
+  max-height: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: rgb(215, 215, 215);
@@ -59,14 +69,19 @@ body {
   color: rgb(56, 56, 56);
 }
 
-#mainContainer h2 {
+.hTag {
   margin-bottom: 20px;
   margin-left: 2%;
+  max-width: 100px;
+}
+
+#mainContainer h2 {
+  user-select: none;
 }
 
 #mainContainer hr {
   max-width: 97%;
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
   overflow: hidden;
 }
 
@@ -74,8 +89,8 @@ body {
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-left: 2.5%;
-  justify-content: flex-start;
+  /* margin-left: 2.5%; */
+  justify-content: center;
 }
 
 /* 제품 이미지, 정보 div */
@@ -97,25 +112,66 @@ body {
 .imgBox img {
   max-width: 90%;
   margin: 0 auto;
-}
-
-.font {
-  font-family: "Ubuntu", serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 17px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .mar {
-  margin-bottom: 5%;
+  margin: 5% 0;
 }
 
 .innerBox {
   display: flex;
   justify-content: space-between;
+  margin: 5px 3% 0 7%;
+}
+
+.favoriteIcon {
+  width: 20%;
+}
+
+.favoriteIcon img {
+  margin-top: 7%;
+  width: 60%;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.line {
+  width: 90%;
+  height: 1px;
+  background-color: rgb(72, 72, 72);
   margin: 0 auto;
 }
 
-.heartIcon img {
-  width: 20%;
+/* footer */
+#footer {
+  width: 100%;
+  height: 600px;
+  background-color: #e2e7ec;
+  box-shadow: 0 0 20px 0 rgb(132, 132, 132);
+}
+
+.footImg {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.footImg img {
+  margin: 0 auto;
+  max-width: 90%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.fontCenter {
+  width: 100%;
+  text-align: center;
+}
+
+.fontCenter p {
+  margin-top: 100px;
 }
