@@ -1,16 +1,21 @@
-// 네비게이션 경고창
-function alert() {
-  Swal.fire({
-    icon: "error",
-    title: "준비 중..",
-    text: "아직 준비되지 않았습니다.",
-  });
-}
+fetch("nav.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("nav").innerHTML = data;
 
-// 페이지 이동
-function move() {
-  window.location.href = "../html/bearCraftShopCart.html";
-}
+    // 동적으로 삽입된 <script> 실행
+    const scripts = document.querySelectorAll("#nav script");
+    scripts.forEach((script) => {
+      const newScript = document.createElement("script");
+      if (script.src) {
+        newScript.src = script.src;
+      } else {
+        newScript.textContent = script.textContent;
+      }
+      document.body.appendChild(newScript);
+    });
+  })
+  .catch((error) => console.error("Error loading nav.html:", error));
 
 // footer
 footer.innerHTML =

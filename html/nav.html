@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/nav.css" />
+    <!-- 경고창 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logoImg">
+        <a href="../html/bearCraftShop.html" target="_blank">
+          <img src="../image/bearLogo.png" />
+        </a>
+      </div>
+      <div class="icon">
+        <img
+          onclick="showAlert()"
+          src="../image/personIcon.png"
+          alt="login icon"
+        />
+        <img
+          onclick="move()"
+          src="../image/shoppingIcon.png"
+          alt="shopping icon"
+        />
+        <div class="num"></div>
+      </div>
+    </div>
+    <script src="../js/nav.js"></script>
+  </body>
+</html>
