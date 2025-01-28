@@ -1,3 +1,14 @@
+const num = document.getElementById("num");
+
+let shoppingCart =
+  JSON.parse(window.localStorage.getItem("shoppingCart")) || [];
+
+if (shoppingCart.length === 0) {
+  num.innerText = 0;
+} else {
+  num.innerText = shoppingCart.length;
+}
+
 // 네비게이션 경고창
 function showAlert() {
   Swal.fire({

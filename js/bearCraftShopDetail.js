@@ -1,17 +1,4 @@
-function addCart() {
-  Swal.fire({
-    title: "장바구니에 추가되었습니다.",
-    icon: "success",
-    showCancelButton: true,
-    cancelButtonColor: "#d33",
-    confirmButtonText: "장바구니로 이동",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location.href = "../html/bearCraftShopCart.html";
-    }
-  });
-}
-
+// 제품 정보
 const product = document.getElementById("product");
 const imgBox = document.createElement("div");
 imgBox.id = "imgBox";
@@ -45,28 +32,103 @@ fetch("nav.html")
     const scripts = document.querySelectorAll("#nav script");
     scripts.forEach((script) => {
       const newScript = document.createElement("script");
-      if (script.src) {
-        newScript.src = script.src;
-      } else {
-        newScript.textContent = script.textContent;
-      }
+      newScript.src = script.src || "";
+      newScript.textContent = script.textContent || "";
       document.body.appendChild(newScript);
     });
   })
   .catch((error) => console.error("Error loading nav.html:", error));
 
-// 제품 정보
+// 장바구니 추가
+function addCart() {
+  let shoppingCart =
+    JSON.parse(window.localStorage.getItem("shoppingCart")) || [];
+  const productUrl = new URLSearchParams(window.location.search);
+  const productId = productUrl.get("id");
+  const product = saveData.find((item) => item.id === productId);
+
+  if (product) {
+    let userInfo = {
+      img: product.img,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      detail: product.detail,
+    };
+
+    const shoppingId = shoppingCart.filter(
+      (item) => item.id === product.id
+    ).length;
+
+    // 중복일 시
+    if (shoppingId >= 1) {
+      Swal.fire({
+        title: "장바구니에 이미 이 상품이 있습니다.",
+        text: "추가하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "취소",
+        confirmButtonText: "장바구니 추가",
+      }).then((result) => {
+        // 중복으로 추가
+        if (result.isConfirmed) {
+          shoppingCart.push(userInfo);
+          window.localStorage.setItem(
+            "shoppingCart",
+            JSON.stringify(shoppingCart)
+          );
+
+          Swal.fire({
+            title: "장바구니에 추가되었습니다.",
+            icon: "success",
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            confirmButtonText: "장바구니로 이동",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "../html/bearCraftShopCart.html";
+            }
+
+            // 취소 시 새로고침
+            if (result.isDismissed) {
+              location.reload();
+              window.scrollTo(0, 0);
+            }
+          });
+        }
+      });
+    } else {
+      // 중복 아닐 시
+      shoppingCart.push(userInfo);
+      window.localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+      Swal.fire({
+        title: "장바구니에 추가되었습니다.",
+        icon: "success",
+        showCancelButton: true,
+        cancelButtonColor: "#d33",
+        confirmButtonText: "장바구니로 이동",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "../html/bearCraftShopCart.html";
+        }
+        // 취소 시 새로고침
+        if (result.isDismissed) {
+          location.reload();
+          window.scrollTo(0, 0);
+        }
+      });
+    }
+  }
+}
+
+// 제품 정보 표시
 window.onload = function () {
   const productUrl = new URLSearchParams(window.location.search);
   const productId = productUrl.get("id");
-
   const product = saveData.find((item) => item.id === productId);
 
-  console.log(product);
-
   if (product) {
-    console.log(product.detail);
-    // 해당 제품 정보 출력
     document.getElementById("productName").innerText = product.name;
     document.getElementById("productPrice").innerText = `₩ ${Number(
       product.price
@@ -78,6 +140,8 @@ window.onload = function () {
   } else {
     console.log("제품을 찾을 수 없습니다.");
   }
+
+  window.scrollTo(0, 0);
 };
 
 // footer
