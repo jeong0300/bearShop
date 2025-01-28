@@ -3,6 +3,7 @@ function addCart() {
     title: "장바구니에 추가되었습니다.",
     icon: "success",
     showCancelButton: true,
+    cancelButtonColor: "#d33",
     confirmButtonText: "장바구니로 이동",
   }).then((result) => {
     if (result.isConfirmed) {

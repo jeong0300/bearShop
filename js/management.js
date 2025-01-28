@@ -39,23 +39,24 @@ let detailCom = true;
 // 로컬 스토리지
 let saveData = JSON.parse(window.localStorage.getItem("saveData")) || [];
 
-// 네비게이션 경고창
-function alert() {
-  Swal.fire({
-    icon: "error",
-    title: "준비 중..",
-    text: "아직 준비되지 않았습니다.",
-  });
-}
+// 네비게이션 로드
+fetch("nav.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("nav").innerHTML = data;
 
-// 페이지 이동
-function move() {
-  window.location.href = "../html/bearCraftShopCart.html";
-}
-
-function moveDetail(id) {
-  window.location.href = `../html/bearCraftShopDetail.html?id=${id}`;
-}
+    const scripts = document.querySelectorAll("#nav script");
+    scripts.forEach((script) => {
+      const newScript = document.createElement("script");
+      if (script.src) {
+        newScript.src = script.src;
+      } else {
+        newScript.textContent = script.textContent;
+      }
+      document.body.appendChild(newScript);
+    });
+  })
+  .catch((error) => console.error("Error loading nav.html:", error));
 
 // 저장 버튼 활성화
 function complete() {

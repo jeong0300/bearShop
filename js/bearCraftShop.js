@@ -12,6 +12,7 @@ mainContainer.appendChild(headDiv);
 
 let saveData = JSON.parse(window.localStorage.getItem("saveData")) || [];
 
+// 네비게이션 로드
 fetch("nav.html")
   .then((response) => response.text())
   .then((data) => {
