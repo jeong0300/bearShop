@@ -1,12 +1,14 @@
+if (typeof window.shoppingCart === "undefined") {
+  window.shoppingCart =
+    JSON.parse(window.localStorage.getItem("shoppingCart")) || []; // 전역으로
+}
+
 const num = document.getElementById("num");
 
-let shoppingCart =
-  JSON.parse(window.localStorage.getItem("shoppingCart")) || [];
-
-if (shoppingCart.length === 0) {
+if (window.shoppingCart.length === 0) {
   num.innerText = 0;
 } else {
-  num.innerText = shoppingCart.length;
+  num.innerText = window.shoppingCart.length;
 }
 
 // 네비게이션 경고창

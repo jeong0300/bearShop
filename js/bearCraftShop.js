@@ -63,12 +63,23 @@ function heart() {
 
 // 제품 출력
 function addTr() {
+  // 만약 saveData가 비어있을 씨
+  if (saveData.length === 0) {
+    const prepareImgDiv = document.createElement("div");
+    prepareImgDiv.id = "prepareImgBox";
+    prepareImgDiv.innerHTML = `
+      <img src="../image/prepare.png" alt="Prepare Image" />
+    `;
+    contentDiv.appendChild(prepareImgDiv);
+    mainContainer.appendChild(contentDiv);
+    return;
+  }
+
+  // saveData가 비어있지 않을 시
   const rows = saveData.map((data) => {
     const priceFin = Number(data.price).toLocaleString();
     const div = document.createElement("div");
     div.id = "productBox";
-
-    console.log("addTr()");
 
     div.innerHTML = `
     <div class="box" id="${data.id}" data-id="${data.id}">
@@ -80,9 +91,10 @@ function addTr() {
         <div class="favoriteIcon" onclick="heart()" data-fav="${
           data.favorite ? "1" : "0"
         }">
-        <img src="../image/${
-          data.favorite ? "favoriteFillIcon" : "favoriteIcon"
-        }.png"/></div>
+          <img src="../image/${
+            data.favorite ? "favoriteFillIcon" : "favoriteIcon"
+          }.png"/>
+        </div>
       </div>
       <div class="line"></div>
       <div class="font mar"> ₩ &nbsp${priceFin} </div>
@@ -90,6 +102,7 @@ function addTr() {
 
     contentDiv.appendChild(div);
   });
+
   mainContainer.appendChild(contentDiv);
 }
 
@@ -98,5 +111,6 @@ footer.innerHTML =
   "<div class='footImg'> <img src='../image/bearShopLogo.png' alt='bearShopLogo'/></div> <div class ='fontCenter'><h3> 대표 : 이수정 </h3> <h3> 연락처 : dltnwjd8898@naver.com </h3><p>Copyright © bearCraftShop all right reserved.</p></div>";
 
 window.onload = function () {
+  window.scrollTo(0, 0);
   addTr();
 };

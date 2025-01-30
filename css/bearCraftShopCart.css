@@ -7,6 +7,126 @@ body {
   background-color: #e2e7ec;
 }
 
+/* 장바구니 */
+#container {
+  padding-top: 8%;
+}
+
+#mainContainer {
+  margin: 0 auto;
+  max-width: 1280px;
+  height: auto;
+  color: rgb(56, 56, 56);
+}
+
+.hTag {
+  margin-bottom: 20px;
+  margin-left: 2%;
+  max-width: 200px;
+}
+
+#mainContainer h2 {
+  user-select: none;
+}
+
+#mainContainer hr {
+  max-width: 97%;
+  margin: 0 auto 30px auto;
+}
+
+#count {
+  text-align: right;
+  padding-right: 3%;
+}
+
+#proContainer {
+  margin: 50px auto;
+}
+
+#product {
+  margin: 30px auto 50px auto;
+  padding: 15px 50px;
+  max-width: 1000px;
+  width: 97%;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* 상품 이미지 */
+.imgPro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgPro img {
+  margin-top: 6px;
+  max-width: 130px;
+  width: 130px;
+  max-height: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* 상품 정보 */
+.strPro {
+  margin-top: 6px;
+  margin-left: 10px;
+  max-width: 850px;
+  width: 850px;
+  height: 130px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.productPrice {
+  font-size: 16px;
+  color: #e74c3c;
+  margin-top: 10px;
+}
+
+/* 삭제 버튼 */
+.deleteButton {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
+}
+
+.deleteButton:hover {
+  background-color: #c0392b;
+}
+
+#emptyImgBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+
 /* footer */
 #footer {
   width: 100%;
@@ -35,4 +155,129 @@ body {
 
 .fontCenter p {
   margin-top: 100px;
+}
+
+@media screen and (max-width: 1250px) {
+  #container {
+    padding-top: 10%;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  #container {
+    padding-top: 12%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #container {
+    padding-top: 13%;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  #container {
+    padding-top: 15%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  #container {
+    padding-top: 17%;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  #container {
+    padding-top: 20%;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  #container {
+    padding-top: 28%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  #product {
+    flex-direction: row;
+    padding: 10px;
+  }
+
+  .imgPro img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .strPro {
+    width: 75%;
+    margin-left: 15px;
+  }
+
+  .deleteButton {
+    margin: 0 auto;
+    width: 90px;
+    position: absolute;
+  }
+}
+
+/* 작은 화면에서 세로로 레이아웃 변경 */
+@media screen and (max-width: 768px) {
+  #product {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+  }
+
+  .imgPro img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .strPro {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .deleteButton {
+    width: 80%;
+    margin: 10px auto;
+    position: absolute;
+  }
+}
+
+/* 아주 작은 화면에서 더 간소화된 디자인 */
+@media screen and (max-width: 480px) {
+  #product {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .imgPro img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .strPro {
+    width: 100%;
+    margin-left: 0;
+    font-size: 14px;
+  }
+
+  .productName {
+    font-size: 16px;
+  }
+
+  .productPrice {
+    font-size: 14px;
+  }
+
+  .deleteButton {
+    width: 80%;
+    font-size: 14px;
+    margin: 10px auto;
+    position: absolute;
+  }
 }

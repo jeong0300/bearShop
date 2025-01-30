@@ -10,6 +10,7 @@
   height: 70px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 15px 0 rgb(132, 132, 132);
+  z-index: 999;
 }
 
 .icon {
