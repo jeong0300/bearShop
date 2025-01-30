@@ -94,11 +94,19 @@ function addCart() {
 
     // 즐겨찾기에서 제품 제거
     deleteButton.onclick = function () {
-      const updatedCart = shoppingCart.filter(
-        (cartItem) => cartItem.id !== item.id
+      // 제품 중복일 경우를 대비해 인덱스로 구분해 삭제
+      const index = shoppingCart.findIndex(
+        (cartItem) => cartItem.id === item.id
       );
-      window.localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
-      location.reload();
+
+      if (index !== -1) {
+        shoppingCart.splice(index, 1);
+        window.localStorage.setItem(
+          "shoppingCart",
+          JSON.stringify(shoppingCart)
+        );
+        location.reload();
+      }
     };
 
     divPro.appendChild(imgPro);
