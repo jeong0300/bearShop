@@ -38,7 +38,6 @@ const innerCount = document.createElement("div");
 const proContainer = document.createElement("div");
 proContainer.id = "proContainer";
 
-// 'product' 요소는 이미 동적으로 추가되어 있으므로 다시 추가할 필요 없음.
 divStr.innerHTML =
   "<div class='hTag'><h2> SHOPPING CART </h2></div><div class='lineTag'><hr/></div>";
 
@@ -71,14 +70,16 @@ function addCart() {
     return;
   }
 
+  shoppingCart.sort((a, b) => a.id - b.id);
+
   // 장바구니에 상품이 있을 시
-  shoppingCart.forEach((item) => {
+  shoppingCart.map((item) => {
     const divPro = document.createElement("div");
     divPro.id = "product";
 
     const imgPro = document.createElement("div");
     imgPro.classList.add("imgPro");
-    imgPro.innerHTML = `<img src="../image/${item.img}" alt="${item.name}" />`;
+    imgPro.innerHTML = `<img src="../image/${item.img}" alt="${item.name}" onclick="moveDetail(${item.id})">`;
 
     const strPro = document.createElement("div");
     strPro.classList.add("strPro");
@@ -92,36 +93,126 @@ function addCart() {
     deleteButton.innerText = "삭제";
     deleteButton.classList.add("deleteButton");
 
-    // 즐겨찾기에서 제품 제거
     deleteButton.onclick = function () {
-      // 제품 중복일 경우를 대비해 인덱스로 구분해 삭제
-      const index = shoppingCart.findIndex(
-        (cartItem) => cartItem.id === item.id
-      );
+      Swal.fire({
+        title: "장바구니에서 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "취소",
+        confirmButtonText: "삭제",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // 인덱스를 찾아 제거
+          const index = shoppingCart.findIndex(
+            (cartItem) => cartItem.id === item.id
+          );
 
-      if (index !== -1) {
-        shoppingCart.splice(index, 1);
-        window.localStorage.setItem(
-          "shoppingCart",
-          JSON.stringify(shoppingCart)
-        );
-        location.reload();
-      }
+          if (index !== -1) {
+            shoppingCart.splice(index, 1);
+            window.localStorage.setItem(
+              "shoppingCart",
+              JSON.stringify(shoppingCart)
+            );
+            location.reload();
+          }
+        }
+      });
     };
 
     divPro.appendChild(imgPro);
     divPro.appendChild(strPro);
     divPro.appendChild(deleteButton);
 
-    // 상품을 proContainer에 추가
+    // 상품 추가
     proContainer.appendChild(divPro);
   });
+
+  const clearBtn = document.createElement("button");
+  clearBtn.id = "clearBtn";
+  clearBtn.innerText = "모두 지우기";
+  clearBtn.classList.add("clearButton");
+
+  // 스토리지 삭제 버튼
+  clearBtn.onclick = function () {
+    Swal.fire({
+      title: "장바구니를 비우겠습니까?",
+      text: "장바구니의 상품이 모두 사라집니다.",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonText: "취소",
+      confirmButtonText: "삭제",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (result.isConfirmed) {
+          window.localStorage.removeItem("shoppingCart");
+          location.reload();
+          scrollTo(0, 0);
+        }
+      }
+    });
+  };
+
+  if (shoppingCart.length > 0) {
+    proContainer.appendChild(clearBtn);
+  }
+
+  const receiptDiv = document.createElement("div");
+  receiptDiv.classList.add("receipt");
+
+  let totalPrice = 0;
+  const productCount = {};
+
+  shoppingCart.map((item) => {
+    // 상품 아이디 별 개수
+    if (productCount[item.id]) {
+      productCount[item.id].quantity += 1;
+    } else {
+      productCount[item.id] = {
+        name: item.name,
+        price: item.price,
+        quantity: 1,
+      };
+    }
+  });
+
+  // 영수증 추가
+  for (let id in productCount) {
+    const receiptItem = document.createElement("div");
+    receiptItem.classList.add("receiptItem");
+
+    const name = document.createElement("div");
+    name.classList.add("receiptName");
+    name.innerText = productCount[id].name;
+
+    const quantity = document.createElement("div");
+    quantity.classList.add("receiptQuantity");
+    quantity.innerText = `${productCount[id].quantity}개`; // 개수 출력
+
+    const price = document.createElement("div");
+    price.classList.add("receiptPrice");
+    price.innerText = `₩ ${Number(productCount[id].price).toLocaleString()}`;
+
+    receiptItem.appendChild(name);
+    receiptItem.appendChild(quantity);
+    receiptItem.appendChild(price);
+
+    totalPrice += productCount[id].price * productCount[id].quantity; // 총 가격 계산
+    receiptDiv.appendChild(receiptItem);
+  }
+
+  const totalDiv = document.createElement("div");
+  totalDiv.classList.add("receiptTotal");
+  totalDiv.innerHTML = `<div class="totalText">총 가격: ₩ ${Number(
+    totalPrice
+  ).toLocaleString()}</div>`;
+  receiptDiv.appendChild(totalDiv);
+
+  proContainer.appendChild(receiptDiv);
 }
 
-// 페이지 로드 시 장바구니 표시
 window.onload = function () {
   window.scrollTo(0, 0);
-  addCart(); // 장바구니 내용 출력
+  addCart();
 };
 
 // footer
