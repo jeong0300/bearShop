@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../css/text_management.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 경고창 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+    <title>BEARCRAFT SHOP</title>
+  </head>
+  <body>
+    <div id="nav"></div>
+
+    <div class="inputs">
+      <input type="number" id="id" placeholder="아이디를 입력해 주세요." />
+      <div id="idAlert"></div>
+
+      <input id="name" placeholder="상품 이름을 입력해 주세요." />
+      <div id="nameAlert"></div>
+
+      <input type="number" id="price" placeholder="가격을 입력해 주세요." />
+      <div id="priceAlert"></div>
+
+      <input id="detail" placeholder="상세를 입력해 주세요." />
+      <div id="detailAlert"></div>
+
+      <div class="radioAll">
+        <input type="radio" name="category" value="new" checked />
+        <div class="font">New</div>
+        <input type="radio" name="category" value="color" />
+        <div class="font">Color Bear</div>
+        <input type="radio" name="category" value="concept" />
+        <div class="font">Concept Bear</div>
+      </div>
+
+      <button id="btnSelect" onclick="data()" disabled="true">저장</button>
+    </div>
+    <div class="mainContainer"></div>
+
+    <script src="../js/management.js"></script>
+  </body>
+</html>
