@@ -148,17 +148,10 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
 }
 
 #clearBtn:hover {
   background-color: #cc0000;
-  transform: scale(1.05);
-}
-
-#clearBtn:active {
-  background-color: #990000;
-  transform: scale(0.95);
 }
 
 /* 영수증 전체 스타일 */
@@ -225,11 +218,19 @@ body {
 }
 
 /* 구매하기 버튼 */
+#btnContainer {
+  display: flex;
+  max-width: 1280px;
+  justify-content: center;
+}
+
 .purchaseButton {
+  width: 100%;
+  max-width: 200px;
   background-color: #617e9a;
   color: white;
-  padding: 10px 20px;
-  font-size: 15px;
+  padding: 12px 20px;
+  font-size: 16px;
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -251,6 +252,7 @@ body {
   margin-top: 70px;
   padding-top: 50px;
   bottom: 0;
+  right: 0;
   overflow: hidden;
 }
 

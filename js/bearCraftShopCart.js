@@ -198,7 +198,13 @@ function addCart() {
   totalDiv.innerHTML = `<div class="totalText">총 가격: ₩ ${Number(
     totalPrice
   ).toLocaleString()}</div>`;
+
+  receiptDiv.appendChild(totalDiv);
+  proContainer.appendChild(receiptDiv);
+
   // 구매하기 버튼 추가
+  const btnContainer = document.createElement("div");
+  btnContainer.id = "btnContainer";
   const purchaseBtn = document.createElement("button");
   purchaseBtn.id = "purchaseBtn";
   purchaseBtn.innerText = "구매하기";
@@ -224,11 +230,8 @@ function addCart() {
     });
   };
 
-  // 총 가격 및 구매 버튼 추가
-  totalDiv.appendChild(purchaseBtn);
-  receiptDiv.appendChild(totalDiv);
-
-  proContainer.appendChild(receiptDiv);
+  btnContainer.appendChild(purchaseBtn);
+  proContainer.appendChild(btnContainer);
 }
 
 window.onload = function () {
