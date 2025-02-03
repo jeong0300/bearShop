@@ -3,7 +3,6 @@ fetch("nav.html")
   .then((data) => {
     document.getElementById("nav").innerHTML = data;
 
-    // 동적으로 삽입된 <script> 실행
     const scripts = document.querySelectorAll("#nav script");
     scripts.forEach((script) => {
       const newScript = document.createElement("script");
@@ -180,7 +179,7 @@ function addCart() {
 
     const quantity = document.createElement("div");
     quantity.classList.add("receiptQuantity");
-    quantity.innerText = `${productCount[id].quantity}개`; // 개수 출력
+    quantity.innerText = `${productCount[id].quantity}개`;
 
     const price = document.createElement("div");
     price.classList.add("receiptPrice");
@@ -199,6 +198,34 @@ function addCart() {
   totalDiv.innerHTML = `<div class="totalText">총 가격: ₩ ${Number(
     totalPrice
   ).toLocaleString()}</div>`;
+  // 구매하기 버튼 추가
+  const purchaseBtn = document.createElement("button");
+  purchaseBtn.id = "purchaseBtn";
+  purchaseBtn.innerText = "구매하기";
+  purchaseBtn.classList.add("purchaseButton");
+
+  // 버튼 클릭 시 경고창 표시
+  purchaseBtn.onclick = function () {
+    Swal.fire({
+      title: "구매하시겠습니까?",
+      text: "구매 후에는 취소가 불가능합니다.",
+      icon: "question",
+      showCancelButton: true,
+      cancelButtonText: "취소",
+      confirmButtonText: "구매",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "구매 완료!",
+          text: "구매가 성공적으로 완료되었습니다.",
+          icon: "success",
+        });
+      }
+    });
+  };
+
+  // 총 가격 및 구매 버튼 추가
+  totalDiv.appendChild(purchaseBtn);
   receiptDiv.appendChild(totalDiv);
 
   proContainer.appendChild(receiptDiv);
