@@ -91,7 +91,7 @@ function addCart() {
 
             // 취소 시 새로고침
             if (result.isDismissed) {
-              location.reload();
+              window.location.href = window.location.href;
               window.scrollTo(0, 0);
             }
           });
@@ -114,7 +114,7 @@ function addCart() {
         }
         // 취소 시 새로고침
         if (result.isDismissed) {
-          location.reload();
+          window.location.href = window.location.href;
           window.scrollTo(0, 0);
         }
       });

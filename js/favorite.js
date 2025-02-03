@@ -56,7 +56,7 @@ function heart() {
       product.favorite = false;
     }
     window.scrollTo(0, 0);
-    window.location.reload();
+    location.reload();
   }
   window.localStorage.setItem("saveData", JSON.stringify(saveData));
 }

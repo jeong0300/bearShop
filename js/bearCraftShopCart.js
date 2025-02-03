@@ -225,6 +225,9 @@ function addCart() {
           title: "구매 완료!",
           text: "구매가 성공적으로 완료되었습니다.",
           icon: "success",
+        }).then(() => {
+          window.localStorage.removeItem("shoppingCart");
+          location.reload();
         });
       }
     });

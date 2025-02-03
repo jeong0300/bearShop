@@ -22,9 +22,15 @@ function showAlert() {
 
 // 페이지 이동
 function move(url) {
-  window.location.href = `../html/${url}`;
+  document.body.classList.add("fade-out");
+  setTimeout(() => {
+    window.location.href = `../html/${url}`;
+  }, 500);
 }
 
 function moveDetail(id) {
-  window.location.href = `../html/bearCraftShopDetail.html?id=${id}`;
+  document.body.classList.add("fade-out");
+  setTimeout(() => {
+    window.location.href = `../html/bearCraftShopDetail.html?id=${id}`;
+  }, 500);
 }
