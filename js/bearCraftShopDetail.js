@@ -136,7 +136,7 @@ window.onload = function () {
     document.getElementById("detail").innerText = product.detail;
     document.getElementById(
       "imgBox"
-    ).style.backgroundImage = `url(../img/${product.img})`;
+    ).style.backgroundImage = `url(../image/${product.img})`;
   } else {
     console.log("제품을 찾을 수 없습니다.");
   }

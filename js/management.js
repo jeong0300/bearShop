@@ -20,6 +20,13 @@ const id = document.getElementById("id");
 const name = document.getElementById("name");
 const price = document.getElementById("price");
 const detail = document.getElementById("detail");
+// radio 값 (추적)
+let selectedValue = "color";
+document.querySelectorAll('input[name="category"]').forEach((radio) => {
+  radio.addEventListener("change", function () {
+    selectedValue = this.value;
+  });
+});
 // div
 const idAlert = document.getElementById("idAlert");
 const nameAlert = document.getElementById("nameAlert");
@@ -72,9 +79,6 @@ function com(userId) {
   const row = document.querySelector(`tr[data-id="${userId}"]`);
 
   const modiBtn = row.querySelector("#modiBtn");
-
-  console.log("row:", row);
-  console.log("btn:", modiBtn);
 
   if (nameCom && priceCom && detailCom) {
     modiBtn.disabled = false;
@@ -211,7 +215,7 @@ function modifyList(id) {
   const user = saveData.find((user) => user.id === String(id));
 
   const userId = user.id;
-  const name = user.name;
+  const name = user.name.replaceAll(" ", "-");
   const price = user.price;
   const detail = user.detail.replaceAll(" ", "-");
 
@@ -241,9 +245,7 @@ function modifyCom() {
   const inputs = row.querySelectorAll("td input");
   const user = saveData.find((user) => user.id === id);
 
-  // console.log(inputs);
-
-  const name = inputs[0].value;
+  const name = inputs[0].value.replaceAll("-", " ");
   const price = inputs[1].value;
   const detail = inputs[2].value.replaceAll("-", " ");
 
@@ -272,33 +274,49 @@ function modifyCom() {
 
 // 클릭 시 데이터 테이블에 추가
 function data() {
-  // 이미지 랜덤 출력
-  const images = [
+  const colorImages = [
     "akb48.png",
     "babyPink.png",
-    "fdmtl.png",
     "gogh.png",
-    "jellyfish.png",
-    "kae.png",
     "lango.png",
-    "munch.png",
     "pinkGold.png",
     "pushead.png",
-    "reachOut.png",
-    "snow.png",
     "stash.png",
-    "ufo.png",
-    "waves.png",
     "xGirl.png",
   ];
-  const chosenImg = images[Math.floor(Math.random() * images.length)];
+  const conceptImages = [
+    "fdmtl.png",
+    "jellyfish.png",
+    "reachOut.png",
+    "kae.png",
+    "munch.png",
+    "snow.png",
+    "ufo.png",
+    "waves.png",
+  ];
+
+  // 카테고리 별 이미지 랜덤
+  function getRandomImage() {
+    let selectedImages;
+
+    if (selectedValue === "color") {
+      selectedImages = colorImages;
+    } else if (selectedValue === "concept") {
+      selectedImages = conceptImages;
+    }
+
+    const chosenImg =
+      selectedImages[Math.floor(Math.random() * selectedImages.length)];
+    return `../image/${chosenImg}`;
+  }
 
   let userInfo = {
-    img: `../image/${chosenImg}`,
+    img: getRandomImage(),
     id: id.value,
     name: name.value,
     price: price.value,
     detail: detail.value,
+    category: selectedValue,
   };
 
   // 테이블 추가 후 저장
@@ -343,7 +361,7 @@ function data() {
 }
 
 // 새로고침에도 테이블 유지
-function addTr() {
+window.onload = function () {
   const rows = saveData.map((data) => {
     const tr = document.createElement("tr");
     const tbody = document.createElement("tbody");
@@ -364,8 +382,4 @@ function addTr() {
   });
 
   rows.map((tr) => table.appendChild(tr));
-}
-
-window.onload = function () {
-  addTr();
 };

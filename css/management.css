@@ -42,6 +42,41 @@ body {
   transition: all 0.3s ease;
 }
 
+/* 라디오 버튼 및 텍스트 중앙 정렬 */
+.radioAll {
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  margin-top: 10px;
+  width: 100%;
+  gap: 0; /* gap 제거 */
+}
+
+.radioAll label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.radioAll input[type="radio"] {
+  margin: 0;
+  padding: 0;
+  transform: scale(1);
+  transform: translateX(-10px);
+}
+
+.radioAll .font {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  transform: translateX(-220px);
+}
+
 /* 저장 버튼 스타일 */
 .inputs button {
   padding: 10px;

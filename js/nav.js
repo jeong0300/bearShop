@@ -21,8 +21,8 @@ function showAlert() {
 }
 
 // 페이지 이동
-function move() {
-  window.location.href = "../html/bearCraftShopCart.html";
+function move(url) {
+  window.location.href = `../html/${url}`;
 }
 
 function moveDetail(id) {

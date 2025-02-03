@@ -19,12 +19,6 @@ fetch("nav.html")
       window.shoppingCart =
         JSON.parse(window.localStorage.getItem("shoppingCart")) || [];
     }
-
-    // num 업데이트
-    const num = document.getElementById("num");
-    if (num) {
-      num.innerText = window.shoppingCart.length;
-    }
   })
   .catch((error) => console.error("Error loading nav.html:", error));
 
