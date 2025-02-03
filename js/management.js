@@ -208,6 +208,7 @@ function modifyInput(userId) {
 }
 
 //수정 버튼
+// 수정 버튼
 function modifyList(id) {
   const modiBtn = event.target;
   const tr = document.querySelector(`tr[data-id="${id}"]`);
@@ -221,7 +222,7 @@ function modifyList(id) {
 
   cells[0].innerHTML = `<input id='name' value=${name} /><div id='alret'></div>`;
   cells[1].innerHTML = `<input id='price' type='number' value=${price} /><div id='alret'></div>`;
-  cells[2].innerHTML = `<input id='detail' value=${detail} /><div id='alret'></div>`;
+  cells[2].innerHTML = `<textarea id='detail'>${detail}</textarea><div id='alret'></div>`;
 
   modiBtn.innerText = "수정완료";
   modiBtn.setAttribute("onclick", `modifyCom(${id})`);
@@ -229,25 +230,25 @@ function modifyList(id) {
 
   const nameInput = cells[0].querySelector("input");
   const priceInput = cells[1].querySelector("input");
-  const detailInput = cells[2].querySelector("input");
+  const detailInput = cells[2].querySelector("textarea");
 
   nameInput.addEventListener("input", () => modifyInput(userId));
   priceInput.addEventListener("input", () => modifyInput(userId));
   detailInput.addEventListener("input", () => modifyInput(userId));
 }
 
-//수정 완료 버튼
+// 수정 완료 버튼
 function modifyCom() {
   const modiBtn = event.target;
   const row = modiBtn.closest("tr");
   const id = row.getAttribute("data-id");
   const tdAll = row.querySelectorAll("td");
-  const inputs = row.querySelectorAll("td input");
+  const inputs = row.querySelectorAll("td input, td textarea"); // 텍스트 영역도 추가
   const user = saveData.find((user) => user.id === id);
 
   const name = inputs[0].value.replaceAll("-", " ");
   const price = inputs[1].value;
-  const detail = inputs[2].value.replaceAll("-", " ");
+  const detail = inputs[2].value.replaceAll("-", " "); // 줄바꿈을 포함한 값 처리
 
   const nameInp = tdAll[1];
   const priceInp = tdAll[2];
@@ -257,7 +258,7 @@ function modifyCom() {
 
   nameInp.innerHTML = `<div> ${name} </div>`;
   priceInp.innerHTML = `<div> ${priceFin} </div>`;
-  detailInp.innerHTML = `<div> ${detail} </div>`;
+  detailInp.innerHTML = `<div> ${detail} </div>`; // 수정된 내용 반영
 
   saveData = saveData.map((user) => {
     if (user.id === id) {

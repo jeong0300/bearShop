@@ -147,11 +147,16 @@ td input {
   border: 1px solid gray;
   border-radius: 7px;
   margin-bottom: 10px;
-  width: 100%;
-  max-width: none; /* max-width 제거 */
+
+  max-width: none;
   box-sizing: border-box;
-  white-space: normal; /* 띄어쓰기 포함된 텍스트도 잘리지 않도록 */
-  overflow: visible; /* 넘칠 경우 텍스트 보이게 */
+  white-space: normal;
+  overflow: visible;
+}
+
+td textarea {
+  width: 100%;
+  height: 100px;
 }
 
 td input:focus {

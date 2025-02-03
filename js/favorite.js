@@ -18,7 +18,6 @@ fetch("nav.html")
   .then((data) => {
     document.getElementById("nav").innerHTML = data;
 
-    // 동적으로 삽입된 <script> 실행
     const scripts = document.querySelectorAll("#nav script");
     scripts.forEach((script) => {
       const newScript = document.createElement("script");
@@ -39,8 +38,6 @@ function heart() {
   const att = Icon.getAttribute("data-fav");
   const productId = Icon.closest(".box").getAttribute("data-id");
 
-  // console.log(att);
-
   if (att === "0") {
     iconImg.src = "../image/favoriteFillIcon.png";
     iconImg.alt = "favorite icon";
@@ -58,26 +55,29 @@ function heart() {
     if (product) {
       product.favorite = false;
     }
+    window.scrollTo(0, 0);
+    window.location.reload();
   }
   window.localStorage.setItem("saveData", JSON.stringify(saveData));
 }
 
-// 제품 출력
+// 즐겨찾기 제품 출력
 function addTr() {
-  // 만약 saveData가 비어있을 씨
-  if (saveData.length === 0) {
+  const filteredData = saveData.filter((item) => item.favorite === true);
+
+  // 즐겨찾기가 없을 시시
+  if (filteredData.length === 0) {
     const prepareImgDiv = document.createElement("div");
     prepareImgDiv.id = "prepareImgBox";
     prepareImgDiv.innerHTML = `
-      <img src="../image/prepare.png" alt="Prepare Image" />
+      <img src="../image/favoriteEmpty.png" alt="Prepare Image" />
     `;
     contentDiv.appendChild(prepareImgDiv);
     mainContainer.appendChild(contentDiv);
     return;
   }
 
-  // saveData가 비어있지 않을 시
-  const rows = saveData.map((data) => {
+  const rows = filteredData.map((data) => {
     const priceFin = Number(data.price).toLocaleString();
     const div = document.createElement("div");
     div.id = "productBox";

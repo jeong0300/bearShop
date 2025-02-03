@@ -65,51 +65,57 @@ document.addEventListener("DOMContentLoaded", () => {
 // 카테고리 별 내용 출력
 const filterMenu = (selectedCategory) => {
   const contentDiv = document.getElementById("content");
-  contentDiv.innerHTML = ""; // 기존 내용 초기화
 
-  if (selectedCategory === "all") {
-    addTr();
-    return;
-  }
+  contentDiv.style.transition = "opacity 1s ease";
+  contentDiv.style.opacity = 0;
 
-  let filteredData = saveData.filter(
-    (item) => item.category === selectedCategory
-  );
+  setTimeout(() => {
+    contentDiv.innerHTML = "";
 
-  if (filteredData.length === 0) {
-    contentDiv.innerHTML = `
-      <div id="prepareImgBox">
-        <img src="../image/prepare.png" alt="Prepare Image" />
-      </div>`;
-    return;
-  }
+    if (selectedCategory === "all") {
+      addTr();
+    } else {
+      let filteredData = saveData.filter(
+        (item) => item.category === selectedCategory
+      );
 
-  filteredData.forEach((data) => {
-    const priceFin = Number(data.price).toLocaleString();
-    const div = document.createElement("div");
-    div.id = "productBox";
+      if (filteredData.length === 0) {
+        contentDiv.innerHTML = `
+          <div id="prepareImgBox">
+            <img src="../image/prepare.png" alt="Prepare Image" />
+          </div>`;
+      } else {
+        filteredData.forEach((data) => {
+          const priceFin = Number(data.price).toLocaleString();
+          const div = document.createElement("div");
+          div.id = "productBox";
 
-    div.innerHTML = `
-    <div class="box" id="${data.id}" data-id="${data.id}">
-      <div class="imgBox" onclick="moveDetail(${data.id})">
-        <img src="${data.img}" alt="product image" />
-      </div>
-      <div class="innerBox">
-        <div class="font"> ${data.name}</div>
-        <div class="favoriteIcon" onclick="heart()" data-fav="${
-          data.favorite ? "1" : "0"
-        }">
-          <img src="../image/${
-            data.favorite ? "favoriteFillIcon" : "favoriteIcon"
-          }.png"/>
-        </div>
-      </div>
-      <div class="line"></div>
-      <div class="font mar"> ₩ &nbsp${priceFin} </div>
-    </div>`;
+          div.innerHTML = `
+            <div class="box" id="${data.id}" data-id="${data.id}">
+              <div class="imgBox" onclick="moveDetail(${data.id})">
+                <img src="${data.img}" alt="product image" />
+              </div>
+              <div class="innerBox">
+                <div class="font"> ${data.name}</div>
+                <div class="favoriteIcon" onclick="heart()" data-fav="${
+                  data.favorite ? "1" : "0"
+                }">
+                  <img src="../image/${
+                    data.favorite ? "favoriteFillIcon" : "favoriteIcon"
+                  }.png"/>
+                </div>
+              </div>
+              <div class="line"></div>
+              <div class="font mar"> ₩ &nbsp${priceFin} </div>
+            </div>`;
 
-    contentDiv.appendChild(div);
-  });
+          contentDiv.appendChild(div);
+        });
+      }
+    }
+
+    contentDiv.style.opacity = 1;
+  }, 300);
 };
 
 // 즐겨찾기
