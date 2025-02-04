@@ -142,11 +142,12 @@ body {
 
 .favoriteIcon {
   width: 20%;
+  margin-right: 3%;
 }
 
 .favoriteIcon img {
   margin-top: 7%;
-  width: 60%;
+  width: 80%;
   cursor: pointer;
   user-select: none;
   -webkit-user-drag: none;
