@@ -1,3 +1,4 @@
+// 장바구니 상품 수
 if (typeof window.shoppingCart === "undefined") {
   window.shoppingCart =
     JSON.parse(window.localStorage.getItem("shoppingCart")) || []; // 전역으로
