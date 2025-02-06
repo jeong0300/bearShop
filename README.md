@@ -31,6 +31,34 @@
 
 <br/>
 
+# 📰 화면 구성
+
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/90ebae87-b8f1-4264-86c9-265808b7bf70" width="200" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/d7323a8d-be58-4a7e-b6c9-665ed152e3da" width="200" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/49553aa1-2f65-4c3a-81a5-332299481b75" width="200" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/6b654265-6af0-4fc1-869c-c698a059eb19" width="200" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/1bfb84db-4859-4e76-93a6-2c471c0fadec" width="200" height="400"></td>
+  </tr>
+</table>
+
+
+<br/>
+
+# 📱 반응형 화면 구성
+
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/18b211f5-fa48-4a58-8c7f-ab528aeffe64" width="300" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/f7d919d5-0516-424d-911e-f51ecdc488e4" width="150" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/779bcd17-417b-4cc5-9b2e-303216f33cd6" width="300" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/c6eb60ef-5a9e-4f90-8af5-a691aa8057e8" width="300" height="400"></td>
+  </tr>
+</table>
+
+<br/>
+
 # ⚙ 주요 기능
 
 <h2> 🌟 카테고리 별 상품 등록, 수정, 삭제 </h2>
