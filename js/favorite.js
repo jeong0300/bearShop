@@ -60,12 +60,11 @@ function heart() {
   }
   window.localStorage.setItem("saveData", JSON.stringify(saveData));
 }
-
 // 즐겨찾기 제품 출력
 function addTr() {
   const filteredData = saveData.filter((item) => item.favorite === true);
 
-  // 즐겨찾기가 없을 시시
+  // 즐겨찾기가 없을 시
   if (filteredData.length === 0) {
     const prepareImgDiv = document.createElement("div");
     prepareImgDiv.id = "prepareImgBox";

@@ -170,8 +170,6 @@ function modifyInput(userId) {
   const inputTarget = event.target;
   const alertDiv = inputTarget.nextElementSibling;
 
-  // console.log(userId);
-
   if (inputTarget.id === "name" && inputTarget.value.length === 0) {
     alertDiv.innerText = "상품명을 작성하여주세요.";
     nameCom = false;
@@ -359,6 +357,53 @@ function data() {
   priceComplete = false;
   detailComplete = false;
   complete();
+}
+
+const download = document.getElementById("excelDownload");
+
+download.addEventListener("click", function () {
+  console.log("눌림");
+  let filename = "testFile.csv";
+  getCSV(filename);
+});
+
+function getCSV(filename) {
+  console.log("실행");
+
+  var csv = [];
+  var row = [];
+
+  row.push("상품명", "가격", "상세");
+
+  csv.push(row.join(","));
+
+  let saveData = JSON.parse(window.localStorage.getItem("saveData")) || [];
+
+  let chartDataList = saveData.map((data) => {});
+
+  chartDataList.forEach((data, index) => {
+    let row = [];
+    row.push(data.d1, data.d2, data.d3);
+  });
+
+  downloadCSV(csv.join("\n"), filename);
+}
+
+function downloadCSV(csv, filename) {
+  var csvFile;
+  var downloadLink;
+
+  //한글 처리를 해주기 위해 BOM 추가하기
+  const BOM = "\uFEFF";
+  csv = BOM + csv;
+
+  csvFile = new Blob([csv], { type: "text/csv" });
+  downloadLink = document.createElement("a");
+  downloadLink.download = filename;
+  downloadLink.href = window.URL.createObjectURL(csvFile);
+  downloadLink.style.display = "none";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
 }
 
 // 새로고침에도 테이블 유지

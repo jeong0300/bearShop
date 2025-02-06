@@ -194,3 +194,20 @@ table button:last-child {
 table button:last-child:hover {
   background-color: #c82333;
 }
+
+.download {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1400px;
+}
+
+#excelDownload {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0 25px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}

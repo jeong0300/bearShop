@@ -18,11 +18,11 @@ mainContainer.appendChild(categoryDiv);
 let saveData = JSON.parse(window.localStorage.getItem("saveData")) || [];
 
 // 네비게이션 로드
+
 fetch("nav.html")
   .then((response) => response.text())
   .then((data) => {
     document.getElementById("nav").innerHTML = data;
-
     // 동적으로 삽입된 <script> 실행
     const scripts = document.querySelectorAll("#nav script");
     scripts.forEach((script) => {
