@@ -362,28 +362,27 @@ function data() {
 const download = document.getElementById("excelDownload");
 
 download.addEventListener("click", function () {
-  console.log("눌림");
-  let filename = "testFile.csv";
+  let filename = "bearCraftShop_Products.csv";
   getCSV(filename);
 });
 
 function getCSV(filename) {
-  console.log("실행");
-
   var csv = [];
   var row = [];
 
-  row.push("상품명", "가격", "상세");
+  row.push("상품명, 가격, 상세");
 
   csv.push(row.join(","));
 
   let saveData = JSON.parse(window.localStorage.getItem("saveData")) || [];
 
-  let chartDataList = saveData.map((data) => {});
+  saveData.map((data) => {
+    const Empty = data.detail.replaceAll("\n", " ");
+    const detail = Empty.replaceAll(",", " ");
 
-  chartDataList.forEach((data, index) => {
-    let row = [];
-    row.push(data.d1, data.d2, data.d3);
+    let row = [data.name, data.price, detail];
+
+    csv.push(row.join(","));
   });
 
   downloadCSV(csv.join("\n"), filename);

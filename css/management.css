@@ -202,12 +202,28 @@ table button:last-child:hover {
 }
 
 #excelDownload {
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 0 25px;
+  background-color: #6e8fb1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
   margin-bottom: 30px;
   cursor: pointer;
   user-select: none;
   -webkit-user-drag: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#excelDownload:hover {
+  background-color: #62809e;
+  box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+#excelDownload:active {
+  background-color: #6e8fb1;
+  transform: translateY(0);
 }
