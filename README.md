@@ -46,7 +46,7 @@
     <td><img src="https://github.com/user-attachments/assets/d7323a8d-be58-4a7e-b6c9-665ed152e3da" width="200" height="400"></td>
     <td><img src="https://github.com/user-attachments/assets/49553aa1-2f65-4c3a-81a5-332299481b75" width="200" height="400"></td>
     <td><img src="https://github.com/user-attachments/assets/6b654265-6af0-4fc1-869c-c698a059eb19" width="200" height="400"></td>
-    <td><img src="https://github.com/user-attachments/assets/1bfb84db-4859-4e76-93a6-2c471c0fadec" width="200" height="400"></td>
+    <td><img src="https://github.com/user-attachments/assets/a57ceaab-98b1-4679-a46c-eb60dd1ead73" width="200" height="400"></td>
   </tr>
 </table>
 
@@ -81,6 +81,14 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp수정 혹은 삭제 후 로컬 스토리지에 업데이트</h4>
 <div align="center">
   <img src="https://github.com/user-attachments/assets/6b24d6f9-0d6c-418d-9c6b-8a7774c97626">
+</div>
+
+<br/>
+
+<h2> 🌟 상품 정보 csv로 다운로드 </h2>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp상품 정보를 csv 파일로 변환 </h4>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/f6e0a3d0-e57c-416f-ade0-6eae4195d334">
 </div>
 
 <br/>
