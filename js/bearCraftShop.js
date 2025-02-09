@@ -191,6 +191,87 @@ function addTr() {
   mainContainer.appendChild(contentDiv);
 }
 
+// 페이지네이션
+function renderPagination(currentPage) {
+  let totalPage = Math.ceil(saveData.length / 10);
+  let pageGroup = Math.ceil(currentPage / 5);
+
+  let last = pageGroup * 5;
+  if (last > totalPage) last = totalPage;
+  let first = last - (5 - 1) <= 0 ? 1 : last - (5 - 1);
+  let next = last + 1;
+  let prev = first - 1;
+
+  const fragmentPage = document.createDocumentFragment();
+  if (prev > 0) {
+    let allpreli = document.createElement("li");
+    allpreli.insertAdjacentHTML(
+      "beforeend",
+      `<a href='#js-bottom' id='allprev'>&lt;&lt;</a>`
+    );
+
+    let preli = document.createElement("li");
+    preli.insertAdjacentHTML(
+      "beforeend",
+      `<a href='#js-bottom' id='prev'>&lt;</a>`
+    );
+
+    fragmentPage.appendChild(allpreli);
+    fragmentPage.appendChild(preli);
+  }
+
+  for (let i = first; i <= last; i++) {
+    const li = document.createElement("li");
+    li.insertAdjacentHTML(
+      "beforeend",
+      `<a href='#js-bottom' id='page-${i}' data-num='${i}'>${i}</a>`
+    );
+    fragmentPage.appendChild(li);
+  }
+
+  if (last < totalPage) {
+    let allendli = document.createElement("li");
+    allendli.insertAdjacentHTML(
+      "beforeend",
+      `<a href='#js-bottom'  id='allnext'>&gt;&gt;</a>`
+    );
+
+    let endli = document.createElement("li");
+    endli.insertAdjacentHTML(
+      "beforeend",
+      `<a  href='#js-program-detail-bottom'  id='next'>&gt;</a>`
+    );
+
+    fragmentPage.appendChild(endli);
+    fragmentPage.appendChild(allendli);
+  }
+
+  document.getElementById("js-pagination").appendChild(fragmentPage);
+  // 페이지 목록 생성
+
+  // $(`#js-pagination a`).removeClass("active");
+  // $(`#js-pagination a#page-${currentPage}`).addClass("active");
+
+  const aTag = document.getElementsByTagName("a").map((atag) => {});
+
+  aTag.click(function (e) {
+    e.preventDefault();
+    let $item = $(this);
+    let $id = $item.attr("id");
+    let selectedPage = $item.text();
+
+    if ($id == "next") selectedPage = next;
+    if ($id == "prev") selectedPage = prev;
+    if ($id == "allprev") selectedPage = 1;
+    if ($id == "allnext") selectedPage = totalPage;
+
+    list.renderPagination(selectedPage); //페이지네이션 그리는 함수
+    list.search(selectedPage); //페이지 그리는 함수
+  });
+}
+
+renderPagination(1);
+
 // footer
 footer.innerHTML =
   "<div class='footImg'> <img src='../image/bearShopLogo.png' alt='bearShopLogo'/></div> <div class ='fontCenter'><h3> 대표 : 이수정 </h3> <h3> 연락처 : dltnwjd8898@naver.com </h3><p>Copyright © bearCraftShop all right reserved.</p></div>";

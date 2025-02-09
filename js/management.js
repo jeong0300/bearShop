@@ -359,6 +359,7 @@ function data() {
   complete();
 }
 
+// 엑셀 다운로드
 const download = document.getElementById("excelDownload");
 
 download.addEventListener("click", function () {
