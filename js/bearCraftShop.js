@@ -189,28 +189,33 @@ function addTr() {
   });
 
   mainContainer.appendChild(contentDiv);
+  _totalCount = saveData.length;
+  renderPagination(1);
 }
 
 // 페이지네이션
 function renderPagination(currentPage) {
-  let totalPage = Math.ceil(saveData.length / 10);
-  let pageGroup = Math.ceil(currentPage / 5);
+  if (_totalCount <= 10) return;
 
-  let last = pageGroup * 5;
+  var totalPage = Math.ceil(_totalCount / 10);
+  var pageGroup = Math.ceil(currentPage / 5);
+
+  var last = pageGroup * 5;
   if (last > totalPage) last = totalPage;
-  let first = last - (5 - 1) <= 0 ? 1 : last - (5 - 1);
-  let next = last + 1;
-  let prev = first - 1;
+  var first = last - (5 - 1) <= 0 ? 1 : last - (5 - 1);
+  var next = last + 1;
+  var prev = first - 1;
 
   const fragmentPage = document.createDocumentFragment();
+
   if (prev > 0) {
-    let allpreli = document.createElement("li");
+    var allpreli = document.createElement("li");
     allpreli.insertAdjacentHTML(
       "beforeend",
       `<a href='#js-bottom' id='allprev'>&lt;&lt;</a>`
     );
 
-    let preli = document.createElement("li");
+    var preli = document.createElement("li");
     preli.insertAdjacentHTML(
       "beforeend",
       `<a href='#js-bottom' id='prev'>&lt;</a>`
@@ -220,7 +225,7 @@ function renderPagination(currentPage) {
     fragmentPage.appendChild(preli);
   }
 
-  for (let i = first; i <= last; i++) {
+  for (var i = first; i <= last; i++) {
     const li = document.createElement("li");
     li.insertAdjacentHTML(
       "beforeend",
@@ -230,13 +235,13 @@ function renderPagination(currentPage) {
   }
 
   if (last < totalPage) {
-    let allendli = document.createElement("li");
+    var allendli = document.createElement("li");
     allendli.insertAdjacentHTML(
       "beforeend",
       `<a href='#js-bottom'  id='allnext'>&gt;&gt;</a>`
     );
 
-    let endli = document.createElement("li");
+    var endli = document.createElement("li");
     endli.insertAdjacentHTML(
       "beforeend",
       `<a  href='#js-program-detail-bottom'  id='next'>&gt;</a>`
@@ -249,16 +254,14 @@ function renderPagination(currentPage) {
   document.getElementById("js-pagination").appendChild(fragmentPage);
   // 페이지 목록 생성
 
-  // $(`#js-pagination a`).removeClass("active");
-  // $(`#js-pagination a#page-${currentPage}`).addClass("active");
+  $(`#js-pagination a`).removeClass("active");
+  $(`#js-pagination a#page-${currentPage}`).addClass("active");
 
-  const aTag = document.getElementsByTagName("a").map((atag) => {});
-
-  aTag.click(function (e) {
+  $("#js-pagination a").click(function (e) {
     e.preventDefault();
-    let $item = $(this);
-    let $id = $item.attr("id");
-    let selectedPage = $item.text();
+    var $item = $(this);
+    var $id = $item.attr("id");
+    var selectedPage = $item.text();
 
     if ($id == "next") selectedPage = next;
     if ($id == "prev") selectedPage = prev;
@@ -269,8 +272,6 @@ function renderPagination(currentPage) {
     list.search(selectedPage); //페이지 그리는 함수
   });
 }
-
-renderPagination(1);
 
 // footer
 footer.innerHTML =

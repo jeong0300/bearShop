@@ -197,6 +197,10 @@ body {
   margin-top: 100px;
 }
 
+.active {
+  color: red;
+}
+
 @media screen and (max-width: 1250px) {
   #container {
     padding-top: 10%;
