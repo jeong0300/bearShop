@@ -142,7 +142,7 @@
 
 <h2> 🌟 페이지네이션 </h2>
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp카테고리에 따라 필터링된 상품을 페이지별로 나누어 일정 수의 항목만 출력</h4>
-<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp현재 페이지와 전체 페이지 수를 기준으로, 이전/다음 페이지 버튼과 해당 범위의 페이지 번호를 동적으로 생성하여 출력</h4>
+<h4>&nbsp&nbsp&nbsp&nbsp-&nbsp현재 페이지와 전체 페이지 수를 기준으로 <br/> 이전/다음 페이지 버튼과 해당 범위의 페이지 번호를 동적으로 생성하여 출력</h4>
 <div align="center">
 
  ![Image](https://github.com/user-attachments/assets/9e07f0f9-26f2-415e-ba74-403c71ee4e64)
