@@ -297,6 +297,9 @@ body {
   #container {
     padding-top: 13%;
   }
+  .deleteButton {
+    right: 70px;
+  }
 }
 
 @media screen and (max-width: 690px) {
@@ -378,10 +381,7 @@ body {
   .receipt {
     width: 90%;
     padding: 15px;
-  }
-  .receipt {
-    width: 90%;
-    padding: 15px;
+    margin-right: 32px;
   }
 
   .receiptItem {

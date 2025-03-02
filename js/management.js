@@ -206,7 +206,6 @@ function modifyInput(userId) {
 }
 
 //수정 버튼
-// 수정 버튼
 function modifyList(id) {
   const modiBtn = event.target;
   const tr = document.querySelector(`tr[data-id="${id}"]`);

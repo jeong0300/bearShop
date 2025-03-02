@@ -63,60 +63,91 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // 카테고리 별 내용 출력
-const filterMenu = (selectedCategory) => {
-  const contentDiv = document.getElementById("content");
+let currentPage = 1;
+let selectedCategory = "all";
+let filteredData = saveData;
 
+const filterMenu = (category, page = 1) => {
+  const contentDiv = document.getElementById("content");
   contentDiv.style.transition = "opacity 1s ease";
   contentDiv.style.opacity = 0;
+
+  selectedCategory = category;
+  currentPage = page;
 
   setTimeout(() => {
     contentDiv.innerHTML = "";
 
     if (selectedCategory === "all") {
-      addTr();
+      filteredData = saveData;
     } else {
-      let filteredData = saveData.filter(
+      filteredData = saveData.filter(
         (item) => item.category === selectedCategory
       );
+    }
 
-      if (filteredData.length === 0) {
-        contentDiv.innerHTML = `
-          <div id="prepareImgBox">
-            <img src="../image/prepare.png" alt="Prepare Image" />
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+    // 현재 페이지에 해당하는 데이터만 잘라서 가져오기
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const dataToDisplay = filteredData.slice(startIdx, endIdx);
+
+    // 필터링된 데이터 출력
+    if (dataToDisplay.length === 0) {
+      contentDiv.innerHTML = `
+        <div id="prepareImgBox">
+          <img src="../image/prepare.png" alt="Prepare Image" />
+        </div>`;
+    } else {
+      dataToDisplay.forEach((data) => {
+        const priceFin = Number(data.price).toLocaleString();
+        const div = document.createElement("div");
+        div.id = "productBox";
+
+        div.innerHTML = `
+          <div class="box" id="${data.id}" data-id="${data.id}">
+            <div class="imgBox" onclick="moveDetail(${data.id})">
+              <img src="${data.img}" alt="product image" />
+            </div>
+            <div class="innerBox">
+              <div class="font"> ${data.name}</div>
+              <div class="favoriteIcon" onclick="heart(event)" data-fav="${
+                data.favorite ? "1" : "0"
+              }">
+                <img src="../image/${
+                  data.favorite ? "favoriteFillIcon" : "favoriteIcon"
+                }.png"/>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="font mar"> ₩ &nbsp${priceFin} </div>
           </div>`;
-      } else {
-        filteredData.forEach((data) => {
-          const priceFin = Number(data.price).toLocaleString();
-          const div = document.createElement("div");
-          div.id = "productBox";
 
-          div.innerHTML = `
-            <div class="box" id="${data.id}" data-id="${data.id}">
-              <div class="imgBox" onclick="moveDetail(${data.id})">
-                <img src="${data.img}" alt="product image" />
-              </div>
-              <div class="innerBox">
-                <div class="font"> ${data.name}</div>
-                <div class="favoriteIcon" onclick="heart()" data-fav="${
-                  data.favorite ? "1" : "0"
-                }">
-                  <img src="../image/${
-                    data.favorite ? "favoriteFillIcon" : "favoriteIcon"
-                  }.png"/>
-                </div>
-              </div>
-              <div class="line"></div>
-              <div class="font mar"> ₩ &nbsp${priceFin} </div>
-            </div>`;
+        contentDiv.appendChild(div);
+      });
 
-          contentDiv.appendChild(div);
-        });
-      }
+      document.getElementById("js-pagination").style.display = "block";
+      renderPagination(currentPage, totalPages);
     }
 
     contentDiv.style.opacity = 1;
   }, 300);
 };
+
+// 카테고리별 클릭 처리
+document.addEventListener("DOMContentLoaded", () => {
+  const categoryItems = document.querySelectorAll("#categoryList li a");
+
+  categoryItems.forEach((item) => {
+    item.addEventListener("click", (event) => {
+      const selectedCategory = event.target.dataset.contents;
+      // 카테고리 변경 시 필터링된 결과 업데이트
+      filterMenu(selectedCategory);
+    });
+  });
+});
 
 // 즐겨찾기
 function heart() {
@@ -195,20 +226,31 @@ function addTr() {
 
 // 페이지네이션
 function renderPagination(currentPage) {
-  if (_totalCount <= 10) return;
+  console.log("kk", currentPage);
+  if (filteredData.length <= 10) {
+    document.getElementById("js-pagination").style.display = "none";
+    return;
+  } else {
+    document.getElementById("js-pagination").style.display = "block";
+  }
 
-  var totalPage = Math.ceil(_totalCount / 10);
-  var pageGroup = Math.ceil(currentPage / 5);
+  var totalPage = Math.ceil(filteredData.length / 10);
+  var pageGroup = Math.floor((currentPage - 1) / 5);
 
-  var last = pageGroup * 5;
+  var last = (pageGroup + 1) * 5;
   if (last > totalPage) last = totalPage;
-  var first = last - (5 - 1) <= 0 ? 1 : last - (5 - 1);
-  var next = last + 1;
-  var prev = first - 1;
+  var first = last - 4;
+  if (first <= 0) first = 1;
+
+  var next = currentPage + 1;
+  var prev = currentPage - 1;
 
   const fragmentPage = document.createDocumentFragment();
+  const paginationElement = document.getElementById("js-pagination");
+  paginationElement.innerHTML = "";
 
-  if (prev > 0) {
+  // 이전 버튼 처리
+  if (currentPage >= 2) {
     var allpreli = document.createElement("li");
     allpreli.insertAdjacentHTML(
       "beforeend",
@@ -225,6 +267,7 @@ function renderPagination(currentPage) {
     fragmentPage.appendChild(preli);
   }
 
+  // 페이지 번호 출력
   for (var i = first; i <= last; i++) {
     const li = document.createElement("li");
     li.insertAdjacentHTML(
@@ -234,50 +277,104 @@ function renderPagination(currentPage) {
     fragmentPage.appendChild(li);
   }
 
-  if (last < totalPage) {
+  // 다음 버튼 처리
+  if (currentPage < last) {
     var allendli = document.createElement("li");
     allendli.insertAdjacentHTML(
       "beforeend",
-      `<a href='#js-bottom'  id='allnext'>&gt;&gt;</a>`
+      `<a href='#js-bottom' id='allnext'>&gt;&gt;</a>`
     );
 
     var endli = document.createElement("li");
     endli.insertAdjacentHTML(
       "beforeend",
-      `<a  href='#js-program-detail-bottom'  id='next'>&gt;</a>`
+      `<a href='#js-bottom' id='next'>&gt;</a>`
     );
 
     fragmentPage.appendChild(endli);
     fragmentPage.appendChild(allendli);
   }
 
-  document.getElementById("js-pagination").appendChild(fragmentPage);
-  // 페이지 목록 생성
+  paginationElement.appendChild(fragmentPage);
 
-  $(`#js-pagination a`).removeClass("active");
-  $(`#js-pagination a#page-${currentPage}`).addClass("active");
+  // 페이지네이션에 클릭 이벤트 리스너 추가
+  const paginationLinks = document.querySelectorAll("#js-pagination a");
+  paginationLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
 
-  $("#js-pagination a").click(function (e) {
-    e.preventDefault();
-    var $item = $(this);
-    var $id = $item.attr("id");
-    var selectedPage = $item.text();
+      const $item = this;
+      let selectedPage = currentPage;
 
-    if ($id == "next") selectedPage = next;
-    if ($id == "prev") selectedPage = prev;
-    if ($id == "allprev") selectedPage = 1;
-    if ($id == "allnext") selectedPage = totalPage;
+      if ($item.id === "next") selectedPage = next;
+      if ($item.id === "prev") selectedPage = prev;
+      if ($item.id === "allprev") selectedPage = 1;
+      if ($item.id === "allnext") selectedPage = totalPage;
+      if ($item.id.startsWith("page-"))
+        selectedPage = parseInt($item.textContent);
 
-    list.renderPagination(selectedPage); //페이지네이션 그리는 함수
-    list.search(selectedPage); //페이지 그리는 함수
+      // 페이지가 바뀌면 renderPagination을 호출
+      currentPage = selectedPage; // currentPage 값 갱신
+      renderPagination(currentPage);
+      filterMenuByPage(currentPage);
+    });
   });
+
+  paginationLinks.forEach((link) => {
+    link.classList.remove("active");
+  });
+  document
+    .querySelector(`#js-pagination a#page-${currentPage}`)
+    .classList.add("active");
 }
 
-// footer
-footer.innerHTML =
-  "<div class='footImg'> <img src='../image/bearShopLogo.png' alt='bearShopLogo'/></div> <div class ='fontCenter'><h3> 대표 : 이수정 </h3> <h3> 연락처 : dltnwjd8898@naver.com </h3><p>Copyright © bearCraftShop all right reserved.</p></div>";
+// 해당 페이지의 제품을 필터링해서 출력
+function filterMenuByPage(pageNumber) {
+  console.log(pageNumber);
+  const itemsPerPage = 10;
+  const startIndex = (pageNumber - 1) * itemsPerPage;
+  const endIndex = pageNumber * itemsPerPage;
+
+  const dataToShow = filteredData.slice(startIndex, endIndex);
+  const contentDiv = document.getElementById("content");
+  contentDiv.innerHTML = "";
+
+  if (dataToShow.length === 0) {
+    contentDiv.innerHTML = `No products available for this page.`;
+  } else {
+    dataToShow.forEach((data) => {
+      const priceFin = Number(data.price).toLocaleString();
+      const div = document.createElement("div");
+      div.id = "productBox";
+      div.innerHTML = ` 
+        <div class="box" id="${data.id}" data-id="${data.id}">
+          <div class="imgBox" onclick="moveDetail(${data.id})">
+            <img src="${data.img}" alt="product image" />
+          </div>
+          <div class="innerBox">
+            <div class="font">${data.name}</div>
+            <div class="favoriteIcon" onclick="heart()" data-fav="${
+              data.favorite ? "1" : "0"
+            }">
+              <img src="../image/${
+                data.favorite ? "favoriteFillIcon" : "favoriteIcon"
+              }.png"/>
+            </div>
+          </div>
+          <div class="line"></div>
+          <div class="font mar"> ₩ ${priceFin} </div>
+        </div>`;
+      contentDiv.appendChild(div);
+    });
+  }
+}
 
 window.onload = function () {
   window.scrollTo(0, 0);
   addTr();
+  filterMenuByPage(currentPage);
 };
+
+// footer
+footer.innerHTML =
+  "<div class='footImg'> <img src='../image/bearShopLogo.png' alt='bearShopLogo'/></div> <div class ='fontCenter'><h3> 대표 : 이수정 </h3> <h3> 연락처 : dltnwjd8898@naver.com </h3><p>Copyright © bearCraftShop all right reserved.</p></div>";
