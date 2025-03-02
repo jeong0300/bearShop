@@ -134,7 +134,7 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp제품 삭제 시 로컬 스토리지에서 삭제</h4>
 <div align="center">
 
- 
+ ![Image](https://github.com/user-attachments/assets/7b80c0ad-482b-40ab-af52-6047464c8590)
 
 </div>
 
