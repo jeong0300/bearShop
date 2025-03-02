@@ -134,7 +134,7 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp제품 삭제 시 로컬 스토리지에서 삭제</h4>
 <div align="center">
 
- ![Image](https://github.com/user-attachments/assets/9e07f0f9-26f2-415e-ba74-403c71ee4e64)
+ 
 
 </div>
 
@@ -145,7 +145,7 @@
 <h4>&nbsp&nbsp&nbsp&nbsp-&nbsp현재 페이지와 전체 페이지 수를 기준으로, 이전/다음 페이지 버튼과 해당 범위의 페이지 번호를 동적으로 생성하여 출력</h4>
 <div align="center">
 
- ![Image](https://github.com/user-attachments/assets/2d1b4545-1cd5-40aa-8a0d-2c211f518cb4)
+ ![Image](https://github.com/user-attachments/assets/9e07f0f9-26f2-415e-ba74-403c71ee4e64)
  
 </div>
 
